@@ -27,6 +27,22 @@
       "N8N_BASIC_AUTH_PASSWORD": {
         "description": "Basic Authentication Password to secure n8n.",
         "value": "pass"
+      },
+      "AUTH0_DOMAIN": {
+        "description": "Auth0: Domain",
+        "value": ".auth0.com"
+      },
+      "AUTH0_CLIENT_ID": {
+        "description": "Auth0: Client ID.",
+        "value": ""
+      },
+      "AUTH0_CLIENT_SECRET": {
+        "description": "Auth0: Client Secret.",
+        "value": "•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"
+      },
+      "AUTH0_CALLBACK_URL": {
+        "description": "Auth0: Callback URL; include the protocol and FQDN/CNAME of your Heroku app",
+        "value": "/workflow"
       }
     },
     "formation": {
@@ -44,6 +60,9 @@
       },
       {
         "plan": "papertrail:choklad"
+      },
+      {
+        "plan": "auth0"
       }
     ]
   }
