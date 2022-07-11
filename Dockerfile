@@ -3,7 +3,7 @@
 FROM alpine:latest as tailscale
 WORKDIR /app
 COPY . ./
-ENV TSFILE=tailscale_1.26.0_amd64.tgz
+ENV TSFILE=tailscale_1.26.2_amd64.tgz
 RUN wget https://pkgs.tailscale.com/stable/${TSFILE} && \
   tar xzf ${TSFILE} --strip-components=1
 COPY . ./
@@ -11,7 +11,7 @@ COPY . ./
 FROM node:lts-alpine
 
 # pass N8N_VERSION Argument while building or use default
-ARG N8N_VERSION=0.181.1
+ARG N8N_VERSION=0.185.0
 
 # Update everything and install needed dependencies
 RUN apk add --update graphicsmagick tzdata
