@@ -11,7 +11,7 @@ COPY . ./
 FROM node:lts-alpine
 
 # pass N8N_VERSION Argument while building or use default
-ARG N8N_VERSION=0.185.0
+ARG N8N_VERSION=0.196.0
 
 # Update everything and install needed dependencies
 RUN apk add --update graphicsmagick tzdata
@@ -21,7 +21,7 @@ USER root
 
 # Install n8n and the also temporary all the packages
 # it needs to build it correctly.
-RUN apk --update add --virtual build-dependencies python3 build-base ca-certificates && \
+RUN apk --update add --virtual build-dependencies python3 build-base ca-certificates git && \
 	npm_config_user=root npm install --location=global n8n@${N8N_VERSION} && \
 	apk del build-dependencies && \
 	rm -rf /var/cache/apk/*
