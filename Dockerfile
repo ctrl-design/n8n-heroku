@@ -23,6 +23,7 @@ USER root
 # it needs to build it correctly.
 RUN apk --update add --virtual build-dependencies python3 build-base ca-certificates git && \
 	npm_config_user=root npm install --location=global n8n@${N8N_VERSION} && \
+	npm_config_user=root npm install --location=global newrelic --save && \
 	apk del build-dependencies && \
 	rm -rf /var/cache/apk/*
 
