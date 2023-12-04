@@ -8,38 +8,23 @@ RUN wget https://pkgs.tailscale.com/stable/${TSFILE} && \
   tar xzf ${TSFILE} --strip-components=1
 COPY . ./
 
-FROM node:lts-alpine
-
-# pass N8N_VERSION Argument while building or use default
 ARG N8N_VERSION=1.19.4
 
-# Update everything and install needed dependencies
-RUN apk add --update graphicsmagick tzdata
+FROM n8nio/n8n:$N8N_VERSION
 
-# Set a custom user to not have n8n run as root
 USER root
-
-# Install n8n and the also temporary all the packages
-# it needs to build it correctly.
-RUN apk --update add --virtual build-dependencies python3 build-base ca-certificates git && \
-	npm_config_user=root npm install --location=global n8n@${N8N_VERSION} && \
-	apk del build-dependencies && \
-	rm -rf /var/cache/apk/*
 
 # Specifying work directory
 WORKDIR /data
-
 COPY --from=tailscale /app/tailscaled /data/tailscaled
 COPY --from=tailscale /app/tailscale /data/tailscale
 RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 
-# copy start script to container
-COPY ./start.sh /
-
-# make the script executable
-RUN chmod +x /start.sh
+WORKDIR /home/node/packages/cli
+ENTRYPOINT []
 
 EXPOSE 5678/tcp
 
-# define execution entrypoint
-CMD ["/start.sh"]
+COPY ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+CMD ["/entrypoint.sh"]
