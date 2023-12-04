@@ -8,9 +8,7 @@ RUN wget https://pkgs.tailscale.com/stable/${TSFILE} && \
   tar xzf ${TSFILE} --strip-components=1
 COPY . ./
 
-ARG N8N_VERSION=1.19.4
-
-FROM n8nio/n8n:$N8N_VERSION
+FROM n8nio/n8n:1.19.4
 
 USER root
 
