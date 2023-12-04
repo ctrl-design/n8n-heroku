@@ -33,7 +33,7 @@ export N8N_DIAGNOSTICS_ENABLED=false
 # prefix variables to avoid conflicts and run parse url function on arg url
 PREFIX="N8N_DB_" parse_url "$ARG_URL"
 
-echo "$N8N_DB_SCHEME://$N8N_DB_USER:$N8N_DB_PASSWORD@$N8N_DB_HOSTPORT/$N8N_DB_DATABASE?sslmode=require"
+echo "$N8N_DB_SCHEME://$N8N_DB_USER:$N8N_DB_PASSWORD@$N8N_DB_HOSTPORT/$N8N_DB_DATABASE"
 
 # Separate host and port    
 N8N_DB_HOST="$(echo $N8N_DB_HOSTPORT | sed -e 's,:.*,,g')"
@@ -45,7 +45,7 @@ if [ $N8N_DB_SCHEME == 'postgres' ]
 then
     echo "indentified DB in use postgreSQL"
 	export DB_TYPE=postgresdb
-	export DB_POSTGRESDB_HOST=$N8N_DB_HOST
+	export DB_POSTGRESDB_HOST="$N8N_DB_HOST?sslmode=require"
 	export DB_POSTGRESDB_PORT=$N8N_DB_PORT
 	export DB_POSTGRESDB_DATABASE=$N8N_DB_DATABASE
 	export DB_POSTGRESDB_USER=$N8N_DB_USER
