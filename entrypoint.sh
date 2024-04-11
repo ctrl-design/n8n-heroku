@@ -31,5 +31,5 @@ export N8N_DIAGNOSTICS_ENABLED=false
 echo "Tailscale started"
 
 # kickstart nodemation
-#n8n
-ALL_PROXY=socks5://localhost:1055/ n8n
+n8n
+#ALL_PROXY=socks5://localhost:1055/ n8n
