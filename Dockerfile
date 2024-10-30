@@ -3,12 +3,12 @@
 FROM alpine:latest as tailscale
 WORKDIR /app
 COPY . ./
-ENV TSFILE=tailscale_1.68.2_amd64.tgz
+ENV TSFILE=tailscale_latest_amd64.tgz
 RUN wget https://pkgs.tailscale.com/stable/${TSFILE} && \
   tar xzf ${TSFILE} --strip-components=1
 COPY . ./
 
-FROM n8nio/n8n:1.48.3
+FROM n8nio/n8n:1.64.3
 
 USER root
 
