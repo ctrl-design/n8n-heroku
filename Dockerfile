@@ -8,7 +8,7 @@ RUN wget https://pkgs.tailscale.com/stable/${TSFILE} && \
   tar xzf ${TSFILE} --strip-components=1
 COPY . ./
 
-FROM n8nio/n8n:1.64.3
+FROM n8nio/n8n:1.116.2
 
 USER root
 
